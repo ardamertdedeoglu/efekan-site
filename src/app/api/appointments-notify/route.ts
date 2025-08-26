@@ -13,11 +13,11 @@ export async function POST(req: Request) {
   try {
     const payload = await req.json(); // Yeni appointment kaydı
 
-    const { data: users, error } = await supabase.from("auth.users").select("email");
+    const { data: users, error } = await supabase.auth.admin.listUsers();
     if (error) throw new Error(error.message);
     if (!users) throw new Error("No users found");
 
-    const adminEmails = users.map(u => u.email).filter(Boolean);
+    const adminEmails = users.users.map(u => u.email).filter(Boolean);
 
     for (const email of adminEmails) {
       await resend.emails.send({
