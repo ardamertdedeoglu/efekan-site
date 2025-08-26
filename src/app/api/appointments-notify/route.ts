@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from 'resend';
+import {nodemailer} from 'nodemailer';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -19,11 +20,19 @@ export async function POST(req: Request) {
 
     const adminEmails = users.users.map(u => u.email);
 
-
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.GMAIL_USERNAME,
+        pass: process.env.GMAIL_PASSWORD,
+      }
+    });
 
     for (const email of adminEmails) {
-      await resend.emails.send({
-        from: "onboarding@resend.dev",
+      await transporter.sendMail({
+        from: process.env.GMAIL_USERNAME,
         to: email!,
         subject: "Yeni Randevu Talebi",
         html: `
