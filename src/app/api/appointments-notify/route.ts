@@ -19,9 +19,11 @@ export async function POST(req: Request) {
 
     const adminEmails = users.users.map(u => u.email);
 
+
+
     for (const email of adminEmails) {
       await resend.emails.send({
-        from: "snmded83@gmail.com",
+        from: "onboarding@resend.dev",
         to: email!,
         subject: "Yeni Randevu Talebi",
         html: `
