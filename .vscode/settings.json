@@ -2,6 +2,7 @@
   "deno.enablePaths": [
     "supabase/functions"
   ],
+  "deno.enable": true,
   "deno.lint": true,
   "deno.unstable": [
     "bare-node-builtins",
@@ -20,5 +21,6 @@
   ],
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
-  }
+  },
+  "deno.path": "C:\\Users\\Arda\\.deno\\bin\\deno.exe"
 }
