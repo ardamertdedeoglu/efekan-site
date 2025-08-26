@@ -31,13 +31,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
-  if (data && data.length > 0) {
-    await fetch("/api/appointments-notify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data[0]),
-    });
+  if (!data || data.length === 0) {
+    return NextResponse.json({ error: "Randevu eklenemedi" }, { status: 500 });
   }
+
+  await fetch("/api/appointments-notify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
 
   return NextResponse.json({ message: "Randevu başarıyla oluşturuldu!" });
 }
