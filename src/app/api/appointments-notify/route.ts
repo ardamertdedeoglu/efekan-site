@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   try {
     const payload = await req.json(); // Yeni appointment kaydı
 
-    const { data: users, error } = await supabase.select("email").from("auth.users");
+    const { data: users, error } = await supabase.from("auth.users").select("email");
     if (error) throw new Error(error.message);
     if (!users) throw new Error("No users found");
 
