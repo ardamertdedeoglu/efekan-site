@@ -9,9 +9,6 @@ const supabase = createClient(
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY!;
-const RESEND_API_URL = "https://api.resend.com/emails";
-
 export async function POST(req: Request) {
   try {
     const payload = await req.json(); // Yeni appointment kaydı
@@ -25,7 +22,7 @@ export async function POST(req: Request) {
     for (const email of adminEmails) {
       await resend.emails.send({
         from: "snmded83@gmail.com",
-        to: email,
+        to: email!,
         subject: "Yeni Randevu Talebi",
         html: `
           <h2>Yeni Randevu Talebi</h2>
