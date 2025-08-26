@@ -258,14 +258,14 @@ export default function AdminPage() {
   return (
     <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
       <div className="mx-auto max-w-6xl px-6 py-8">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <h1 className="text-2xl font-bold">Randevular</h1>
-          <div className="flex items-center gap-3">
-            <ThemeToggle />
+          <div className="flex flex-wrap items-center gap-3">
+            <ThemeToggle className="flex-shrink-0" />
             <button
               type="button"
               onClick={fetchAppointments}
-              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900"
+              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 flex-shrink-0"
             >
               Yenile
             </button>
@@ -273,14 +273,14 @@ export default function AdminPage() {
               type="button"
               onClick={deleteSelected}
               disabled={selected.size === 0 || loading}
-              className="rounded-full bg-rose-600 text-white px-4 py-2 text-sm hover:bg-rose-700 disabled:opacity-50"
+              className="rounded-full bg-rose-600 text-white px-4 py-2 text-sm hover:bg-rose-700 disabled:opacity-50 flex-shrink-0"
             >
               Seçilenleri Sil
             </button>
             <button
               type="button"
               onClick={logout}
-              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900"
+              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 flex-shrink-0"
             >
               Çıkış
             </button>
@@ -402,7 +402,7 @@ export default function AdminPage() {
 
         {detail && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
             aria-hidden={false}
           >
             <div
@@ -413,76 +413,76 @@ export default function AdminPage() {
               role="dialog"
               aria-modal="true"
               aria-labelledby="appointment-dialog-title"
-              className="relative z-10 w-full max-w-lg rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl"
+              className="relative z-10 w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-xl"
             >
-              <div className="p-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
+              <div className="p-4 sm:p-5 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
                 <h2 id="appointment-dialog-title" className="text-lg font-semibold">
                   Randevu Detayları
                 </h2>
                 <button
                   type="button"
                   onClick={() => setDetail(null)}
-                  className="rounded-full border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                  className="rounded-full border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 flex-shrink-0"
                 >
                   Kapat
                 </button>
               </div>
-              <div className="p-5 grid gap-3 text-sm">
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">Ad</div>
-                  <div className="col-span-2 font-medium">{detail.first_name}</div>
+              <div className="p-4 sm:p-5 grid gap-3 text-sm">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">Ad</div>
+                  <div className="sm:col-span-2 font-medium">{detail.first_name}</div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">Soyad</div>
-                  <div className="col-span-2 font-medium">{detail.last_name}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">Soyad</div>
+                  <div className="sm:col-span-2 font-medium">{detail.last_name}</div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">E‑posta</div>
-                  <div className="col-span-2">
-                    <a href={`mailto:${detail.email}`} className="hover:underline">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">E‑posta</div>
+                  <div className="sm:col-span-2">
+                    <a href={`mailto:${detail.email}`} className="hover:underline break-all">
                       {detail.email}
                     </a>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">Telefon</div>
-                  <div className="col-span-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">Telefon</div>
+                  <div className="sm:col-span-2">
                     <a href={`tel:${detail.phone}`} className="hover:underline">
                       {detail.phone}
                     </a>
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">Adres</div>
-                  <div className="col-span-2 break-words">{detail.address}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">Adres</div>
+                  <div className="sm:col-span-2 break-words">{detail.address}</div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">Şikayet</div>
-                  <div className="col-span-2 break-words whitespace-pre-wrap">{detail.complaint}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">Şikayet</div>
+                  <div className="sm:col-span-2 break-words whitespace-pre-wrap">{detail.complaint}</div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">Oluşturulma</div>
-                  <div className="col-span-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">Oluşturulma</div>
+                  <div className="sm:col-span-2">
                     {detail.created_at
                       ? new Date(detail.created_at).toLocaleString("tr-TR")
                       : "-"}
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="text-zinc-500">ID</div>
-                  <div className="col-span-2 text-xs text-zinc-500">{detail.id}</div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                  <div className="text-zinc-500 font-medium">ID</div>
+                  <div className="sm:col-span-2 text-xs text-zinc-500 break-all">{detail.id}</div>
                 </div>
               </div>
-              <div className="p-5 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-end gap-2">
+              <div className="p-4 sm:p-5 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row items-stretch sm:items-center justify-end gap-2">
                 <a
                   href={`tel:${detail.phone}`}
-                  className="inline-flex items-center rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                  className="inline-flex items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
                 >
                   Ara
                 </a>
                 <a
                   href={`mailto:${detail.email}`}
-                  className="inline-flex items-center rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                  className="inline-flex items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
                 >
                   E‑posta Gönder
                 </a>
