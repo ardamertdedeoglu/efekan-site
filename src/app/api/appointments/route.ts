@@ -23,18 +23,19 @@ export async function POST(req: Request) {
   const { first_name, last_name, phone, email, address, complaint } = body;
 
   const supabase = getSupabaseFromRequest(req);
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("appointments")
     .insert([{ first_name, last_name, phone, email, address, complaint }]);
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+
   await fetch("/api/appointments-notify", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(data[0]),
   });
-
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
-  }
 
   return NextResponse.json({ message: "Randevu başarıyla oluşturuldu!" });
 }
