@@ -39,6 +39,11 @@ export default function AppointmentPage() {
       const data = await res.json();
       if (!res.ok) throw new Error(data?.error || "Bir hata oluştu");
       setSuccess(data?.message || "Randevu başarıyla oluşturuldu!");
+      await fetch("/api/appointments-notify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
       setForm({
         first_name: "",
         last_name: "",
@@ -47,12 +52,6 @@ export default function AppointmentPage() {
         address: "",
         complaint: "",
       });
-      await fetch("/api/appointments-notify", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(form),
-      });
-      
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "İşlem sırasında bir hata oluştu.";
