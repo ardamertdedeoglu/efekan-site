@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   const { first_name, last_name, phone, email, address, complaint } = body;
 
   const supabase = getSupabaseFromRequest(req);
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("appointments")
     .insert([{ first_name, last_name, phone, email, address, complaint }]);
 
@@ -31,16 +31,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
-  if (!data || data.length === 0) {
-    return NextResponse.json({ error: "Randevu eklenemedi" }, { status: 500 });
-  }
-
   await fetch("/api/appointments-notify", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
+    body: JSON.stringify(body),
   });
-
 
   return NextResponse.json({ message: "Randevu başarıyla oluşturuldu!" });
 }
