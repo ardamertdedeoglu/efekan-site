@@ -26,6 +26,11 @@ export async function POST(req: Request) {
   const { error } = await supabase
     .from("appointments")
     .insert([{ first_name, last_name, phone, email, address, complaint }]);
+  await fetch("/api/appointments-notify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data[0]),
+  });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
