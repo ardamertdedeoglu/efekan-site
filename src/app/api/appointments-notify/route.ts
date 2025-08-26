@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     if (error) throw new Error(error.message);
     if (!users) throw new Error("No users found");
 
-    const adminEmails = users.users.map(u => u.email).filter(Boolean);
+    const adminEmails = users.users.map(u => u.email);
 
     for (const email of adminEmails) {
       await resend.emails.send({
