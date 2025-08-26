@@ -37,7 +37,7 @@ export async function POST(req: Request) {
         subject: "Yeni Randevu Talebi",
         html: `
           <h2>Yeni Randevu Talebi</h2>
-          <p><b>İsim:</b> ${payload.name} ${payload.surname}</p>
+          <p><b>İsim:</b> ${payload.first_name} ${payload.last_name}</p>
           <p><b>Telefon:</b> ${payload.phone}</p>
           <p><b>Email:</b> ${payload.email}</p>
           <p><b>Adres:</b> ${payload.address || "Belirtilmemiş"}</p>
