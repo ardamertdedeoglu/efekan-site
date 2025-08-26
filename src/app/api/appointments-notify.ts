@@ -9,7 +9,7 @@ const supabase = createClient(
 const RESEND_API_KEY = process.env.RESEND_API_KEY!;
 const RESEND_API_URL = "https://api.resend.com/emails";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(req: Request, res: Response) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
