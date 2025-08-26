@@ -47,6 +47,12 @@ export default function AppointmentPage() {
         address: "",
         complaint: "",
       });
+      await fetch("/api/appointments-notify", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(form),
+      });
+      
     } catch (err: unknown) {
       const message =
         err instanceof Error ? err.message : "İşlem sırasında bir hata oluştu.";
