@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Örnek Sağlık | Güvenilir Tanı ve Tedavi",
-    template: "%s | Örnek Sağlık",
+    default: "Başakşehir Evlere Sağlık | Evinizdeki İlaç",
+    template: "%s | Başakşehir Evlere Sağlık",
   },
   description:
     "Modern teknoloji ve uzman kadro ile poliklinik, laboratuvar, görüntüleme ve acil servis hizmetleri.",
@@ -28,14 +28,14 @@ export const metadata: Metadata = {
     "acil servis",
     "check-up",
   ],
-  metadataBase: new URL("https://www.ornekklinik.com"),
+  metadataBase: new URL("https://basaksehir-evde-saglik.vercel.app/"),
   icons: { icon: "/favicon.ico" },
   openGraph: {
-    title: "Örnek Sağlık | Güvenilir Tanı ve Tedavi",
+    title: "Başakşehir Evlere Sağlık | Evinizdeki İlaç",
     description:
       "Modern teknoloji ve uzman kadro ile poliklinik, laboratuvar, görüntüleme ve acil servis hizmetleri.",
     url: "/",
-    siteName: "Örnek Sağlık",
+    siteName: "Başakşehir Evlere Sağlık",
     locale: "tr_TR",
     type: "website",
   },
