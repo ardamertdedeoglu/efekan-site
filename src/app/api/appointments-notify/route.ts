@@ -1,22 +1,18 @@
-// pages/api/send-appointment-email.ts
+import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY!;
 const RESEND_API_URL = "https://api.resend.com/emails";
 
-export default async function handler(req: Request, res: Response) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
-  const payload = req.body;
-
+export async function POST(req: Request) {
   try {
+    const payload = await req.json(); // Yeni appointment kaydı
+
     const { data: users, error } = await supabase.auth.admin.listUsers();
     if (error) throw new Error(error.message);
 
@@ -30,7 +26,7 @@ export default async function handler(req: Request, res: Response) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          from: "snmded83@gmail.com",
+          from: "noreply@yourdomain.com",
           to: email,
           subject: "Yeni Randevu Talebi",
           html: `
@@ -45,8 +41,11 @@ export default async function handler(req: Request, res: Response) {
       });
     }
 
-    res.status(200).json({ success: true });
+    return NextResponse.json({ success: true });
   } catch (err: any) {
-    res.status(500).json({ error: err.message || "Bilinmeyen hata" });
+    return NextResponse.json(
+      { error: err.message || "Bilinmeyen hata" },
+      { status: 500 }
+    );
   }
 }
