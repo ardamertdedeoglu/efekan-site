@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
     const { data: users, error } = await supabase.auth.admin.listUsers();
     if (error) throw new Error(error.message);
-    if (!data) throw new Error("No users found");
+    if (!users) throw new Error("No users found");
 
     const adminEmails = users.users.map(u => u.email).filter(Boolean);
 
