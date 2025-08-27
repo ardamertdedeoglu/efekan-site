@@ -94,10 +94,10 @@ export default function AdminPage() {
           }
         }
       } catch {}
+      router.replace("/");
       setSession("signed-out");
       setAppointments([]);
       setSelected(new Set());
-      router.replace("/");
     }
   }
 
