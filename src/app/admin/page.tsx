@@ -277,13 +277,15 @@ export default function AdminPage() {
             >
               Seçilenleri Sil
             </button>
-            <button
-              type="button"
-              onClick={logout}
-              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 flex-shrink-0"
-            >
-              Çıkış
-            </button>
+            <a href="/">
+              <button
+                type="button"
+                onClick={logout}
+                className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 flex-shrink-0"
+              >
+                Çıkış
+              </button>
+            </a> 
           </div>
         </div>
 
