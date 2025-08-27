@@ -21,6 +21,7 @@ export default function AdminPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
+  const [logoutLoading, setLogoutLoading] = useState(false);
   const [session, setSession] = useState<
     "unknown" | "signed-in" | "signed-out"
   >("unknown");
@@ -70,6 +71,7 @@ export default function AdminPage() {
   }
 
   async function logout() {
+    setLogoutLoading(true);
     setError(null);
     try {
       const { error: signOutError } = await supabase.auth.signOut({
@@ -94,10 +96,12 @@ export default function AdminPage() {
           }
         }
       } catch {}
+      // Ana sayfaya yönlendir ve state'i temizle
       router.replace("/");
       setSession("signed-out");
       setAppointments([]);
       setSelected(new Set());
+      setLogoutLoading(false);
     }
   }
 
@@ -192,6 +196,20 @@ export default function AdminPage() {
   }
 
   if (session !== "signed-in") {
+    // Çıkış işlemi sırasında boş ekran göster
+    if (logoutLoading) {
+      return (
+        <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 grid place-items-center px-6">
+          <div className="text-center">
+            <div className="animate-spin inline-block w-6 h-6 border-2 border-current border-t-transparent rounded-full" />
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+              Çıkış yapılıyor...
+            </p>
+          </div>
+        </main>
+      );
+    }
+
     return (
       <main className="min-h-screen bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 grid place-items-center px-6">
         <form
@@ -280,9 +298,10 @@ export default function AdminPage() {
             <button
               type="button"
               onClick={logout}
-              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 flex-shrink-0"
+              disabled={logoutLoading}
+              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-900 flex-shrink-0 disabled:opacity-50"
             >
-              Çıkış
+              {logoutLoading ? "Çıkış yapılıyor..." : "Çıkış"}
             </button>
           </div>
         </div>
