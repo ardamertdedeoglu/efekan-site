@@ -2,8 +2,8 @@ import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
 function getSupabaseFromRequest(req: Request) {
-  const url = process.env.SUPABASE_URL as string;
-  const anon = process.env.SUPABASE_ANON_KEY as string;
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
   const authHeader =
     req.headers.get("authorization") || req.headers.get("Authorization");
   const token = authHeader?.startsWith("Bearer ")
