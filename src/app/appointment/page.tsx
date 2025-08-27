@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import ThemeToggle from "../../components/ThemeToggle.tsx";
+import ThemeToggle from "../../components/ThemeToggle";
 
 type FormData = {
   first_name: string;
