@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { supabase } from "../../../lib/supabaseClient";
 import ThemeToggle from "@/components/ThemeToggle";
+import { createClient } from "@supabase/supabase-js";
 
 type Appointment = {
   id: string;
@@ -15,6 +15,10 @@ type Appointment = {
   complaint: string;
   created_at?: string;
 };
+
+const supabaseUrl = process.env.SUPABASE_URL as string;
+const supabaseAnonKey = process.env.SUPABASE_ANON_KEY as string;
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export default function AdminPage() {
   const router = useRouter();
