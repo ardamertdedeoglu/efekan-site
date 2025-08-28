@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const baseUrl = 'https://seninsiten.com';
+  const baseUrl = 'https://basaksehir-evde-saglik.vercel.app';
 
   // Buraya sitendeki URL'leri ekle (dinamik de olabilir)
   const pages = [
