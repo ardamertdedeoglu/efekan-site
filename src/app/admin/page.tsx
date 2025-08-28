@@ -333,7 +333,6 @@ export default function AdminPage() {
                 <th className="p-3 text-left">Telefon</th>
                 <th className="p-3 text-left">Şikayet</th>
                 <th className="p-3 text-left">Adres</th>
-                <th className="p-3 text-left">İşlemler</th>
               </tr>
             </thead>
             <tbody>
@@ -394,28 +393,6 @@ export default function AdminPage() {
                     title={a.address}
                   >
                     {a.address}
-                  </td>
-                  <td className="p-3 align-top">
-                    <div className="flex items-center gap-2">
-                      <a
-                        href={`tel:${a.phone}`}
-                        className="inline-flex items-center rounded-full border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 hover:bg-zinc-50 dark:hover:bg-zinc-900"
-                        aria-label="Ara"
-                        title="Ara"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        Ara
-                      </a>
-                      <a
-                        href={`mailto:${a.email}`}
-                        className="inline-flex items-center rounded-full border border-zinc-300 dark:border-zinc-700 px-3 py-1.5 hover:bg-zinc-50 dark:hover:bg-zinc-900"
-                        aria-label="E‑posta Gönder"
-                        title="E‑posta Gönder"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        E‑posta
-                      </a>
-                    </div>
                   </td>
                 </tr>
               ))}
@@ -508,6 +485,14 @@ export default function AdminPage() {
                   className="inline-flex items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
                 >
                   E‑posta Gönder
+                </a>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(detail.address)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800"
+                >
+                  Haritalarda Göster
                 </a>
               </div>
             </div>
