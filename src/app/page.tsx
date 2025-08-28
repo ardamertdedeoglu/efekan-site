@@ -134,6 +134,13 @@ export default function Home() {
             </span>
             <span>Başakşehir Evlere Sağlık</span>
           </a>
+          
+          {/* Mobil için sadece tema toggle */}
+          <div className="sm:hidden">
+            <ThemeToggle />
+          </div>
+
+          {/* Desktop navigation */}
           <nav className="hidden sm:flex items-center gap-6 text-sm">
             <ThemeToggle />
             <a className="hover:text-emerald-600" href="#hizmetler">
