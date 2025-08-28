@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 function getSupabaseFromRequest(req: Request) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
-  const anon = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
+  const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
   const authHeader =
     req.headers.get("authorization") || req.headers.get("Authorization");
   const token = authHeader?.startsWith("Bearer ")
@@ -39,7 +39,8 @@ export async function GET(req: Request) {
   const { data, error } = await supabase
     .from("appointments")
     .select("*")
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .limit(100); // Son 100 kaydı getir
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 400 });
