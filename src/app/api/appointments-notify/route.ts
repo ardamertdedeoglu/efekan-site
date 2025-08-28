@@ -19,8 +19,8 @@ export async function POST(req: Request) {
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
-      port: 587,
-      secure: false,
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.GMAIL_USERNAME,
         pass: process.env.GMAIL_PASSWORD,
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
 
     for (const email of adminEmails) {
       await transporter.sendMail({
-        from: process.env.GMAIL_USERNAME,
+        from: `"Başakşehir Evlere Sağlık" <${process.env.GMAIL_USERNAME}>`,
         to: email!,
         subject: "Yeni Randevu Talebi",
         html: `
